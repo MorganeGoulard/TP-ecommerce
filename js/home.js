@@ -1,6 +1,7 @@
 import { CreateDropdownItemCategory } from "./component/dropdown-menu/dropdown-items.js";
 import { CreateProductCard } from "./component/product-list/product-card.js";
 import { BASE_URL } from "./consts.js";
+import { GetProductQuery } from "./get-product-query.js";
 
 const $dropdownMenu = document.querySelector(".dropdown-menu");
 const $productCards = document.querySelector("#product-cards");
@@ -13,10 +14,12 @@ axios.get(`${BASE_URL}/categories`).then(function (response){
         $dropdownMenu.appendChild($dropdownMenuItem);
     }
 })
-axios.get(`${BASE_URL}/products`).then((response)=>{
+
+const productQuery = GetProductQuery();
+console.log(productQuery);
+
+axios.get(`${BASE_URL}/products${productQuery}`).then((response)=>{
     const products =response.data;
-    
-    console.log(products);
     for(let product of products){
         const $cardItem = CreateProductCard(product);
         $productCards.appendChild($cardItem);

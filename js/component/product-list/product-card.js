@@ -1,7 +1,7 @@
 export function CreateProductCard(product) {
   //const {id,name,manufacturer,imageUrl,price,description,slug} = product;
   const card = document.createElement("div");
-  card.classList.add("card", "mb-3", "col", "col-xl-2","col-lg-4","col-md-6","col-sm-8","col-12");
+  card.classList.add("card", "mb-3", "col-4");
   const cardImage = CreateCardImage(product);
   const cardBody = CreateCardBody(product);
   card.append(cardImage,cardBody);
