@@ -1,14 +1,24 @@
 import { CreateDropdownItemCategory } from "./component/dropdown-menu/dropdown-items.js";
+import { CreateProductCard } from "./component/product-list/product-card.js";
+import { BASE_URL } from "./consts.js";
 
 const $dropdownMenu = document.querySelector(".dropdown-menu");
+const $productCards = document.querySelector("#product-cards");
 //<ul class="dropdown-menu"></ul>
 
-axios.get("http://localhost:3000/api/v1/categories").then(function (response){
+axios.get(`${BASE_URL}/categories`).then(function (response){
     const categories = response.data;
-    console.log(categories)
     for(let category of categories){
         const $dropdownMenuItem = CreateDropdownItemCategory(category);
         $dropdownMenu.appendChild($dropdownMenuItem);
     }
+})
+axios.get(`${BASE_URL}/products`).then((response)=>{
+    const products =response.data;
     
+    console.log(products);
+    for(let product of products){
+        const $cardItem = CreateProductCard(product);
+        $productCards.appendChild($cardItem);
+    }
 })
